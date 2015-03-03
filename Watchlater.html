@@ -1,0 +1,31 @@
+<html>
+    <head>
+        <script src='https://cdn.firebase.com/js/client/2.0.4/firebase.js'></script>
+        <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
+        <script src='params.js'></script>
+    </head>
+    <body>
+        <script>
+            var ref = new Firebase("https://watchlater.firebaseio.com");
+            ref.authWithCustomToken("JczF31w6KFptsmYayD8deblyrLVZy7MxO29YH50V", function(error, authData) {
+                if (error) {
+                    console.log("Login Failed!", error);
+                } else {
+                    console.log("Login Succeeded!", authData);
+                }
+            });
+
+            ref.on("value", function(snapshot) {
+                console.log(snapshot.val());
+            }, function (errorObject) {
+                console.log("The read failed: " + errorObject.code);
+            });
+
+            var usersRef = ref.child("users");
+            usersRef.child("alanisawesome").set({
+                date_of_birth: "June 23, 1912",
+                full_name: "Alan Turing"
+            });
+        </script>
+    </body>
+</html>

@@ -1,0 +1,22 @@
+<html>
+    <head>
+        <script src='https://cdn.firebase.com/js/client/2.0.4/firebase.js'></script>
+        <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
+    </head>
+    <body>
+        <script>
+            var FirebaseTokenGenerator = require("firebase-token-generator");
+            var tokenGenerator = new FirebaseTokenGenerator("JczF31w6KFptsmYayD8deblyrLVZy7MxO29YH50V");
+            var token = tokenGenerator.createToken({uid: "2", some: "arbitrary", data: "here"});
+
+            var ref = new Firebase("https://watchlater.firebaseio.com");
+            ref.authWithCustomToken(token, function(error, authData) {
+                if (error) {
+                    console.log("Login Failed!", error);
+                } else {
+                    console.log("Login Succeeded!", authData);
+                }
+            });
+        </script>
+    </body>
+</html>
